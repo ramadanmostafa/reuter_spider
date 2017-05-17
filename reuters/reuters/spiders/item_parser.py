@@ -17,39 +17,43 @@ def get_consensus_analysis_data(response, item):
     """
     # initialize the table
     consensus_estimates = [] # estimates, mean, high, low, year_ago
-    for index in range(2, 7):
+    for index in range(1, 7):
         # will append a column each iteration
-        consensus_estimates.append(response.xpath(CONSENSUS_ESTIMATES_XPATH % index).extract())
+        tmp = response.xpath(CONSENSUS_ESTIMATES_XPATH % index).extract()
+        if index == 1:
+            tmp.pop(0)
+            tmp.pop(4)
+        consensus_estimates.append(tmp)
 
     # list of tuples to help me construct item keys
     columns_names = [
         (
+            "sales_consensus_box%d",
+            "earning_consensus_box%d"
+        ),
+        (
             "sales_estimates_box%d",
             "earning_estimates_box%d"
         ),
-
         (
             "sales_mean_box%d",
             "earning_mean_box%d"
         ),
-
         (
             "sales_high_box%d",
             "earning_high_box%d"
         ),
-
         (
             "sales_low_box%d",
             "earning_low_box%d"
         ),
-
         (
             "sales_year_ago_box%d",
             "earning_year_ago_box%d"
         ),
     ]
     # for each column
-    for index1 in range(5):
+    for index1 in range(6):
         # for each cell in the column
         for index2 in range(1, 10):
             if index2 < 5:
