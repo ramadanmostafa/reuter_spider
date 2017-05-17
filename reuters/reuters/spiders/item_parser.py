@@ -9,6 +9,7 @@ from datetime import datetime
 COMPANY_NAME_XPATH = '//*[@id="sectionTitle"]/h1/text()'
 CONSENSUS_ESTIMATES_IS_AVAILABLE_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[2]/div[2]/text()'
 CONSENSUS_ESTIMATES_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[2]/div[2]/table/tbody/tr/td[%d]/text()'
+REVENUE_AND_EARNINGS_TABLE_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[1]/div/div/div[2]/table/tbody/tr/td/text()'
 
 def get_consensus_analysis_data(response, item):
     """
@@ -66,6 +67,30 @@ def get_consensus_analysis_data(response, item):
             item[key] = consensus_estimates[index1][index2 - 1]
     return item
 
+def get_revenue_table_data(response, item):
+    """
+    get REVENUE & EARNINGS PER SHARE table data
+    it will add 2 value to the item
+    """
+    # get all info in the table
+    revenue_table_data = response.xpath(REVENUE_AND_EARNINGS_TABLE_XPATH).extract()
+    # init item
+    item["revenue"] = []
+    item["earnings_per_share"] = []
+    # if flag is True --> this number is revenue
+    # if flag is False --> this number is earnings_per_share
+    flag = True
+    for record in revenue_table_data:
+        # check if the current data is all digits
+        if record.replace(',', '').replace('.', '').isdigit():
+            if flag:
+                item["revenue"].append(record)
+                flag = False
+            else:
+                item["earnings_per_share"].append(record)
+                flag = True
+    return item
+
 def financial_parser(response):
     """
     take the response from reuter_spider and return a ReutersItem
@@ -85,5 +110,8 @@ def financial_parser(response):
             # CONSENSUS ESTIMATES ANALYSIS table is available in the page
             item["No_consensus_analysis_data_available"] = False
             item = get_consensus_analysis_data(response, item)
+        iten = get_revenue_table_data(response, item)
+
+
 
     return item

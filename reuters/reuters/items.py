@@ -76,3 +76,6 @@ class ReutersItem(scrapy.Item):
     earning_year_ago_box3 = scrapy.Field()
     earning_year_ago_box4 = scrapy.Field()
     earning_year_ago_box5 = scrapy.Field()
+
+    revenue = scrapy.Field()
+    earnings_per_share = scrapy.Field()
