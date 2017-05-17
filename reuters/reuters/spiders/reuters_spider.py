@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+scrapy spider to get financial information from reuters.com based on a specific symbol
+"""
 import os
-from datetime import datetime
 import scrapy
 from scrapy.conf import settings
-from ..items import ReutersItem
+from item_parser import financial_parser
 
 
 class ReutersSpiderSpider(scrapy.Spider):
@@ -13,12 +15,12 @@ class ReutersSpiderSpider(scrapy.Spider):
     """
     name = "reuters_spider"
     allowed_domains = ["reuters.com"]
-    BASE_URL = "http://www.reuters.com/finance/stocks/analyst?symbol=%s"
+    BASE_URL = "http://www.reuters.com/finance/stocks/financialHighlights?symbol=%s"
 
     def start_requests(self):
         """
         generate a scrapy request for each symbol from the input file
-        :return: 
+        :return:
         """
         with open(
                 os.path.join(
@@ -32,24 +34,15 @@ class ReutersSpiderSpider(scrapy.Spider):
                     callback=self.parse_page
                 )
 
-    # div
-    #
-    # class ="column1 gridPanel grid8"
     def parse_page(self, response):
         """
         get called once for each request generated from start_requests method
-        :param response: 
-        :return: 
+        :param response:
+        :return:
         """
-        body = response.body
-        folder_path = os.path.join(settings.get("BASE_DIR"), "webpages")
-        filename = response.url.split("=")[-1]
-        with open(os.path.join(folder_path, filename + ".html"), "wb") as f:
-            f.write(body)
-
-        item = ReutersItem()
-        item["response_status"] = response.status
-        item["response_url"] = response.url
-        item["symbol"] = filename
-        item["date"] = str(datetime.now().date())
-        yield item
+        # body = response.body
+        # folder_path = os.path.join(settings.get("BASE_DIR"), "webpages")
+        # filename = response.url.split("=")[-1]
+        # with open(os.path.join(folder_path, filename + ".html"), "wb") as f:
+        #     f.write(body)
+        yield financial_parser(response)
