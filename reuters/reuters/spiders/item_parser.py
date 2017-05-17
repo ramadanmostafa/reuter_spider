@@ -10,6 +10,8 @@ COMPANY_NAME_XPATH = '//*[@id="sectionTitle"]/h1/text()'
 CONSENSUS_ESTIMATES_IS_AVAILABLE_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[2]/div[2]/text()'
 CONSENSUS_ESTIMATES_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[2]/div[2]/table/tbody/tr/td[%d]/text()'
 REVENUE_AND_EARNINGS_TABLE_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[1]/div/div/div[2]/table/tbody/tr/td/text()'
+VALUATION_RATIOS_DATA_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[4]/div[2]/table/tbody/tr/td/text()'
+DIVIDENDS_TABLE_DATA_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[6]/div[2]/table/tbody/tr/td/text()'
 
 def get_consensus_analysis_data(response, item):
     """
@@ -91,6 +93,68 @@ def get_revenue_table_data(response, item):
                 flag = True
     return item
 
+def get_valuation_ratios(response, item):
+    """
+    get VALUATION RATIOS table data
+    it will add 27 value to the item
+    """
+    valuation_ratios_data = response.xpath(VALUATION_RATIOS_DATA_XPATH).extract()
+
+    item["P_E_Ratio_TTM_Company"] = valuation_ratios_data[1]
+    item["P_E_High_Company"] = valuation_ratios_data[5]
+    item["P_E_Low_Company"] = valuation_ratios_data[9]
+    item["Beta_Company"] = valuation_ratios_data[13]
+    item["Price_to_Sales_TTM_Company"] = valuation_ratios_data[17]
+    item["Price_to_Book_MRQ_Company"] = valuation_ratios_data[21]
+    item["Price_to_Tangible_Book_MRQ_Company"] = valuation_ratios_data[25]
+    item["Price_to_Cash_Flow_TTM_Company"] = valuation_ratios_data[29]
+    item["Owned_Institutions_Company"] = valuation_ratios_data[33]
+
+    item["P_E_Ratio_TTM_industry"] = valuation_ratios_data[2]
+    item["P_E_High_industry"] = valuation_ratios_data[6]
+    item["P_E_Low_industry"] = valuation_ratios_data[10]
+    item["Beta_industry"] = valuation_ratios_data[14]
+    item["Price_to_Sales_TTM_industry"] = valuation_ratios_data[18]
+    item["Price_to_Book_MRQ_industry"] = valuation_ratios_data[22]
+    item["Price_to_Tangible_Book_MRQ_industry"] = valuation_ratios_data[26]
+    item["Price_to_Cash_Flow_TTM_industry"] = valuation_ratios_data[30]
+    item["Owned_Institutions_industry"] = valuation_ratios_data[34]
+
+    item["P_E_Ratio_TTM_sector"] = valuation_ratios_data[3]
+    item["P_E_High_sector"] = valuation_ratios_data[7]
+    item["P_E_Low_sector"] = valuation_ratios_data[11]
+    item["Beta_sector"] = valuation_ratios_data[15]
+    item["Price_to_Sales_TTM_sector"] = valuation_ratios_data[19]
+    item["Price_to_Book_MRQ_sector"] = valuation_ratios_data[23]
+    item["Price_to_Tangible_Book_MRQ_sector"] = valuation_ratios_data[27]
+    item["Price_to_Cash_Flow_TTM_sector"] = valuation_ratios_data[31]
+    item["Owned_Institutions_sector"] = valuation_ratios_data[35]
+    return item
+
+def get_dividends_data(response, item):
+    """
+    get DIVIDENDS table data
+    it will add 12 value to the item
+    """
+    dividend_table_data = response.xpath(DIVIDENDS_TABLE_DATA_XPATH).extract()
+
+    item["Dividend_Yield_Company"] = dividend_table_data[1]
+    item["Dividend_Yield_five_Year_Avg_Company"] = dividend_table_data[5]
+    item["Dividend_five_Year_Growth_Rate_Company"] = dividend_table_data[9]
+    item["Payout_Ratio_TTM_Company"] = dividend_table_data[13]
+
+    item["Dividend_Yield_industry"] = dividend_table_data[2]
+    item["Dividend_Yield_five_Year_Avg_industry"] = dividend_table_data[6]
+    item["Dividend_five_Year_Growth_Rate_industry"] = dividend_table_data[10]
+    item["Payout_Ratio_TTM_industry"] = dividend_table_data[14]
+
+    item["Dividend_Yield_sector"] = dividend_table_data[3]
+    item["Dividend_Yield_five_Year_Avg_sector"] = dividend_table_data[7]
+    item["Dividend_five_Year_Growth_Rate_sector"] = dividend_table_data[11]
+    item["Payout_Ratio_TTM_sector"] = dividend_table_data[15]
+
+    return item
+
 def financial_parser(response):
     """
     take the response from reuter_spider and return a ReutersItem
@@ -110,7 +174,9 @@ def financial_parser(response):
             # CONSENSUS ESTIMATES ANALYSIS table is available in the page
             item["No_consensus_analysis_data_available"] = False
             item = get_consensus_analysis_data(response, item)
-        iten = get_revenue_table_data(response, item)
+        item = get_revenue_table_data(response, item)
+        item = get_valuation_ratios(response, item)
+        item = get_dividends_data(response, item)
 
 
 
