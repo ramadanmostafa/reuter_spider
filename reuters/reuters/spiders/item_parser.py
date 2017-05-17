@@ -23,11 +23,30 @@ def get_consensus_analysis_data(response, item):
 
     # list of tuples to help me construct item keys
     columns_names = [
-        ("sales_estimates_box%d", "earning_estimates_box%d"),
-        ("sales_mean_box%d", "earning_mean_box%d"),
-        ("sales_high_box%d", "earning_high_box%d"),
-        ("sales_low_box%d", "earning_low_box%d"),
-        ("sales_year_ago_box%d", "earning_year_ago_box%d"),
+        (
+            "sales_estimates_box%d",
+            "earning_estimates_box%d"
+        ),
+
+        (
+            "sales_mean_box%d",
+            "earning_mean_box%d"
+        ),
+
+        (
+            "sales_high_box%d",
+            "earning_high_box%d"
+        ),
+
+        (
+            "sales_low_box%d",
+            "earning_low_box%d"
+        ),
+
+        (
+            "sales_year_ago_box%d",
+            "earning_year_ago_box%d"
+        ),
     ]
     # for each column
     for index1 in range(5):
