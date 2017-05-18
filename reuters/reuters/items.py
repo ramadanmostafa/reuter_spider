@@ -8,7 +8,9 @@ import scrapy
 class ReutersItem(scrapy.Item):
     """
     column names for scrapped information
+    286 fields
     """
+    # information about the page
     response_status = scrapy.Field()
     response_url = scrapy.Field()
     symbol = scrapy.Field()
@@ -17,6 +19,7 @@ class ReutersItem(scrapy.Item):
     wrong_symbol = scrapy.Field()
     No_consensus_analysis_data_available = scrapy.Field()
 
+    # CONSENSUS ESTIMATES ANALYSIS
     sales_consensus_box1 = scrapy.Field()
     sales_consensus_box2 = scrapy.Field()
     sales_consensus_box3 = scrapy.Field()
@@ -77,50 +80,284 @@ class ReutersItem(scrapy.Item):
     earning_year_ago_box4 = scrapy.Field()
     earning_year_ago_box5 = scrapy.Field()
 
-    revenue = scrapy.Field()
-    earnings_per_share = scrapy.Field()
+    # REVENUE & EARNINGS PER SHARE
+    revenue_earnings_per_share_year_box1 = scrapy.Field()
+    revenue_earnings_per_share_year_box2 = scrapy.Field()
+    revenue_earnings_per_share_year_box3 = scrapy.Field()
 
-    P_E_Ratio_TTM_Company = scrapy.Field()
-    P_E_High_Company = scrapy.Field()
-    P_E_Low_Company = scrapy.Field()
-    Beta_Company = scrapy.Field()
-    Price_to_Sales_TTM_Company = scrapy.Field()
-    Price_to_Book_MRQ_Company = scrapy.Field()
-    Price_to_Tangible_Book_MRQ_Company = scrapy.Field()
-    Price_to_Cash_Flow_TTM_Company = scrapy.Field()
-    Owned_Institutions_Company = scrapy.Field()
+    revenue_earnings_per_share_month_box1 = scrapy.Field()
+    revenue_earnings_per_share_month_box2 = scrapy.Field()
+    revenue_earnings_per_share_month_box3 = scrapy.Field()
+    revenue_earnings_per_share_month_box4 = scrapy.Field()
+    revenue_earnings_per_share_month_box5 = scrapy.Field()
+    revenue_earnings_per_share_month_box6 = scrapy.Field()
+    revenue_earnings_per_share_month_box7 = scrapy.Field()
+    revenue_earnings_per_share_month_box8 = scrapy.Field()
+    revenue_earnings_per_share_month_box9 = scrapy.Field()
+    revenue_earnings_per_share_month_box10 = scrapy.Field()
 
-    P_E_Ratio_TTM_industry = scrapy.Field()
-    P_E_High_industry = scrapy.Field()
-    P_E_Low_industry = scrapy.Field()
-    Beta_industry = scrapy.Field()
-    Price_to_Sales_TTM_industry = scrapy.Field()
-    Price_to_Book_MRQ_industry = scrapy.Field()
-    Price_to_Tangible_Book_MRQ_industry = scrapy.Field()
-    Price_to_Cash_Flow_TTM_industry = scrapy.Field()
-    Owned_Institutions_industry = scrapy.Field()
+    revenue_box1 = scrapy.Field()
+    revenue_box2 = scrapy.Field()
+    revenue_box3 = scrapy.Field()
+    revenue_box4 = scrapy.Field()
+    revenue_box5 = scrapy.Field()
+    revenue_box6 = scrapy.Field()
+    revenue_box7 = scrapy.Field()
+    revenue_box8 = scrapy.Field()
+    revenue_box9 = scrapy.Field()
+    revenue_box10 = scrapy.Field()
 
-    P_E_Ratio_TTM_sector = scrapy.Field()
-    P_E_High_sector = scrapy.Field()
-    P_E_Low_sector = scrapy.Field()
-    Beta_sector = scrapy.Field()
-    Price_to_Sales_TTM_sector = scrapy.Field()
-    Price_to_Book_MRQ_sector = scrapy.Field()
-    Price_to_Tangible_Book_MRQ_sector = scrapy.Field()
-    Price_to_Cash_Flow_TTM_sector = scrapy.Field()
-    Owned_Institutions_sector = scrapy.Field()
+    earnings_per_share_box1 = scrapy.Field()
+    earnings_per_share_box2 = scrapy.Field()
+    earnings_per_share_box3 = scrapy.Field()
+    earnings_per_share_box4 = scrapy.Field()
+    earnings_per_share_box5 = scrapy.Field()
+    earnings_per_share_box6 = scrapy.Field()
+    earnings_per_share_box7 = scrapy.Field()
+    earnings_per_share_box8 = scrapy.Field()
+    earnings_per_share_box9 = scrapy.Field()
+    earnings_per_share_box10 = scrapy.Field()
 
-    Dividend_Yield_Company = scrapy.Field()
-    Dividend_Yield_five_Year_Avg_Company = scrapy.Field()
-    Dividend_five_Year_Growth_Rate_Company = scrapy.Field()
-    Payout_Ratio_TTM_Company = scrapy.Field()
+    # VALUATION RATIOS
+    valuation_ratios_name_box1 = scrapy.Field()
+    valuation_ratios_company_box1 = scrapy.Field()
+    valuation_ratios_industry_box1 = scrapy.Field()
+    valuation_ratios_sector_box1 = scrapy.Field()
 
-    Dividend_Yield_industry = scrapy.Field()
-    Dividend_Yield_five_Year_Avg_industry = scrapy.Field()
-    Dividend_five_Year_Growth_Rate_industry = scrapy.Field()
-    Payout_Ratio_TTM_industry = scrapy.Field()
+    valuation_ratios_name_box2 = scrapy.Field()
+    valuation_ratios_company_box2 = scrapy.Field()
+    valuation_ratios_industry_box2 = scrapy.Field()
+    valuation_ratios_sector_box2 = scrapy.Field()
 
-    Dividend_Yield_sector = scrapy.Field()
-    Dividend_Yield_five_Year_Avg_sector = scrapy.Field()
-    Dividend_five_Year_Growth_Rate_sector = scrapy.Field()
-    Payout_Ratio_TTM_sector = scrapy.Field()
+    valuation_ratios_name_box3 = scrapy.Field()
+    valuation_ratios_company_box3 = scrapy.Field()
+    valuation_ratios_industry_box3 = scrapy.Field()
+    valuation_ratios_sector_box3 = scrapy.Field()
+
+    valuation_ratios_name_box4 = scrapy.Field()
+    valuation_ratios_company_box4 = scrapy.Field()
+    valuation_ratios_industry_box4 = scrapy.Field()
+    valuation_ratios_sector_box4 = scrapy.Field()
+
+    valuation_ratios_name_box5 = scrapy.Field()
+    valuation_ratios_company_box5 = scrapy.Field()
+    valuation_ratios_industry_box5 = scrapy.Field()
+    valuation_ratios_sector_box5 = scrapy.Field()
+
+    valuation_ratios_name_box6 = scrapy.Field()
+    valuation_ratios_company_box6 = scrapy.Field()
+    valuation_ratios_industry_box6 = scrapy.Field()
+    valuation_ratios_sector_box6 = scrapy.Field()
+
+    valuation_ratios_name_box7 = scrapy.Field()
+    valuation_ratios_company_box7 = scrapy.Field()
+    valuation_ratios_industry_box7 = scrapy.Field()
+    valuation_ratios_sector_box7 = scrapy.Field()
+
+    valuation_ratios_name_box8 = scrapy.Field()
+    valuation_ratios_company_box8 = scrapy.Field()
+    valuation_ratios_industry_box8 = scrapy.Field()
+    valuation_ratios_sector_box8 = scrapy.Field()
+
+    valuation_ratios_name_box9 = scrapy.Field()
+    valuation_ratios_company_box9 = scrapy.Field()
+    valuation_ratios_industry_box9 = scrapy.Field()
+    valuation_ratios_sector_box9 = scrapy.Field()
+
+    # dividends
+    dividends_name_box1 = scrapy.Field()
+    dividends_company_box1 = scrapy.Field()
+    dividends_industry_box1 = scrapy.Field()
+    dividends_sector_box1 = scrapy.Field()
+
+    dividends_name_box2 = scrapy.Field()
+    dividends_company_box2 = scrapy.Field()
+    dividends_industry_box2 = scrapy.Field()
+    dividends_sector_box2 = scrapy.Field()
+
+    dividends_name_box3 = scrapy.Field()
+    dividends_company_box3 = scrapy.Field()
+    dividends_industry_box3 = scrapy.Field()
+    dividends_sector_box3 = scrapy.Field()
+
+    dividends_name_box4 = scrapy.Field()
+    dividends_company_box4 = scrapy.Field()
+    dividends_industry_box4 = scrapy.Field()
+    dividends_sector_box4 = scrapy.Field()
+
+    # GROWTH RATES
+    growth_rates_name_box1 = scrapy.Field()
+    growth_rates_name_box2 = scrapy.Field()
+    growth_rates_name_box3 = scrapy.Field()
+    growth_rates_name_box4 = scrapy.Field()
+    growth_rates_name_box5 = scrapy.Field()
+    growth_rates_name_box6 = scrapy.Field()
+    growth_rates_name_box7 = scrapy.Field()
+
+    growth_rates_company_box1 = scrapy.Field()
+    growth_rates_company_box2 = scrapy.Field()
+    growth_rates_company_box3 = scrapy.Field()
+    growth_rates_company_box4 = scrapy.Field()
+    growth_rates_company_box5 = scrapy.Field()
+    growth_rates_company_box6 = scrapy.Field()
+    growth_rates_company_box7 = scrapy.Field()
+
+    growth_rates_industry_box1 = scrapy.Field()
+    growth_rates_industry_box2 = scrapy.Field()
+    growth_rates_industry_box3 = scrapy.Field()
+    growth_rates_industry_box4 = scrapy.Field()
+    growth_rates_industry_box5 = scrapy.Field()
+    growth_rates_industry_box6 = scrapy.Field()
+    growth_rates_industry_box7 = scrapy.Field()
+
+    growth_rates_sector_box1 = scrapy.Field()
+    growth_rates_sector_box2 = scrapy.Field()
+    growth_rates_sector_box3 = scrapy.Field()
+    growth_rates_sector_box4 = scrapy.Field()
+    growth_rates_sector_box5 = scrapy.Field()
+    growth_rates_sector_box6 = scrapy.Field()
+    growth_rates_sector_box7 = scrapy.Field()
+
+    # FINANCIAL STRENGTH
+    financial_strength_name_box1 = scrapy.Field()
+    financial_strength_company_box1 = scrapy.Field()
+    financial_strength_industry_box1 = scrapy.Field()
+    financial_strength_sector_box1 = scrapy.Field()
+
+    financial_strength_name_box2 = scrapy.Field()
+    financial_strength_company_box2 = scrapy.Field()
+    financial_strength_industry_box2 = scrapy.Field()
+    financial_strength_sector_box2 = scrapy.Field()
+
+    financial_strength_name_box3 = scrapy.Field()
+    financial_strength_company_box3 = scrapy.Field()
+    financial_strength_industry_box3 = scrapy.Field()
+    financial_strength_sector_box3 = scrapy.Field()
+
+    financial_strength_name_box4 = scrapy.Field()
+    financial_strength_company_box4 = scrapy.Field()
+    financial_strength_industry_box4 = scrapy.Field()
+    financial_strength_sector_box4 = scrapy.Field()
+
+    financial_strength_name_box5 = scrapy.Field()
+    financial_strength_company_box5 = scrapy.Field()
+    financial_strength_industry_box5 = scrapy.Field()
+    financial_strength_sector_box5 = scrapy.Field()
+
+    # PROFITABILITY RATIOS
+    profitability_ratios_name_box1 = scrapy.Field()
+    profitability_ratios_company_box1 = scrapy.Field()
+    profitability_ratios_industry_box1 = scrapy.Field()
+    profitability_ratios_sector_box1 = scrapy.Field()
+
+    profitability_ratios_name_box2 = scrapy.Field()
+    profitability_ratios_company_box2 = scrapy.Field()
+    profitability_ratios_industry_box2 = scrapy.Field()
+    profitability_ratios_sector_box2 = scrapy.Field()
+
+    profitability_ratios_name_box3 = scrapy.Field()
+    profitability_ratios_company_box3 = scrapy.Field()
+    profitability_ratios_industry_box3 = scrapy.Field()
+    profitability_ratios_sector_box3 = scrapy.Field()
+
+    profitability_ratios_name_box4 = scrapy.Field()
+    profitability_ratios_company_box4 = scrapy.Field()
+    profitability_ratios_industry_box4 = scrapy.Field()
+    profitability_ratios_sector_box4 = scrapy.Field()
+
+    profitability_ratios_name_box5 = scrapy.Field()
+    profitability_ratios_company_box5 = scrapy.Field()
+    profitability_ratios_industry_box5 = scrapy.Field()
+    profitability_ratios_sector_box5 = scrapy.Field()
+
+    profitability_ratios_name_box6 = scrapy.Field()
+    profitability_ratios_company_box6 = scrapy.Field()
+    profitability_ratios_industry_box6 = scrapy.Field()
+    profitability_ratios_sector_box6 = scrapy.Field()
+
+    profitability_ratios_name_box7 = scrapy.Field()
+    profitability_ratios_company_box7 = scrapy.Field()
+    profitability_ratios_industry_box7 = scrapy.Field()
+    profitability_ratios_sector_box7 = scrapy.Field()
+
+    profitability_ratios_name_box8 = scrapy.Field()
+    profitability_ratios_company_box8 = scrapy.Field()
+    profitability_ratios_industry_box8 = scrapy.Field()
+    profitability_ratios_sector_box8 = scrapy.Field()
+
+    profitability_ratios_name_box9 = scrapy.Field()
+    profitability_ratios_company_box9 = scrapy.Field()
+    profitability_ratios_industry_box9 = scrapy.Field()
+    profitability_ratios_sector_box9 = scrapy.Field()
+
+    profitability_ratios_name_box10 = scrapy.Field()
+    profitability_ratios_company_box10 = scrapy.Field()
+    profitability_ratios_industry_box10 = scrapy.Field()
+    profitability_ratios_sector_box10 = scrapy.Field()
+
+    profitability_ratios_name_box11 = scrapy.Field()
+    profitability_ratios_company_box11 = scrapy.Field()
+    profitability_ratios_industry_box11 = scrapy.Field()
+    profitability_ratios_sector_box11 = scrapy.Field()
+
+    profitability_ratios_name_box12 = scrapy.Field()
+    profitability_ratios_company_box12 = scrapy.Field()
+    profitability_ratios_industry_box12 = scrapy.Field()
+    profitability_ratios_sector_box12 = scrapy.Field()
+
+    # EFFICIENCY
+    efficiency_name_box1 = scrapy.Field()
+    efficiency_company_box1 = scrapy.Field()
+    efficiency_industry_box1 = scrapy.Field()
+    efficiency_sector_box1 = scrapy.Field()
+
+    efficiency_name_box2 = scrapy.Field()
+    efficiency_company_box2 = scrapy.Field()
+    efficiency_industry_box2 = scrapy.Field()
+    efficiency_sector_box2 = scrapy.Field()
+
+    efficiency_name_box3 = scrapy.Field()
+    efficiency_company_box3 = scrapy.Field()
+    efficiency_industry_box3 = scrapy.Field()
+    efficiency_sector_box3 = scrapy.Field()
+
+    efficiency_name_box4 = scrapy.Field()
+    efficiency_company_box4 = scrapy.Field()
+    efficiency_industry_box4 = scrapy.Field()
+    efficiency_sector_box4 = scrapy.Field()
+
+    efficiency_name_box5 = scrapy.Field()
+    efficiency_company_box5 = scrapy.Field()
+    efficiency_industry_box5 = scrapy.Field()
+    efficiency_sector_box5 = scrapy.Field()
+
+    # MANAGEMENT EFFECTIVENESS
+    management_effectiveness_name_box1 = scrapy.Field()
+    management_effectiveness_company_box1 = scrapy.Field()
+    management_effectiveness_industry_box1 = scrapy.Field()
+    management_effectiveness_sector_box1 = scrapy.Field()
+
+    management_effectiveness_name_box2 = scrapy.Field()
+    management_effectiveness_company_box2 = scrapy.Field()
+    management_effectiveness_industry_box2 = scrapy.Field()
+    management_effectiveness_sector_box2 = scrapy.Field()
+
+    management_effectiveness_name_box3 = scrapy.Field()
+    management_effectiveness_company_box3 = scrapy.Field()
+    management_effectiveness_industry_box3 = scrapy.Field()
+    management_effectiveness_sector_box3 = scrapy.Field()
+
+    management_effectiveness_name_box4 = scrapy.Field()
+    management_effectiveness_company_box4 = scrapy.Field()
+    management_effectiveness_industry_box4 = scrapy.Field()
+    management_effectiveness_sector_box4 = scrapy.Field()
+
+    management_effectiveness_name_box5 = scrapy.Field()
+    management_effectiveness_company_box5 = scrapy.Field()
+    management_effectiveness_industry_box5 = scrapy.Field()
+    management_effectiveness_sector_box5 = scrapy.Field()
+
+    management_effectiveness_name_box6 = scrapy.Field()
+    management_effectiveness_company_box6 = scrapy.Field()
+    management_effectiveness_industry_box6 = scrapy.Field()
+    management_effectiveness_sector_box6 = scrapy.Field()
