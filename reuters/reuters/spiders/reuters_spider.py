@@ -25,7 +25,7 @@ class ReutersSpiderSpider(scrapy.Spider):
         with open(
                 os.path.join(
                     settings.get("BASE_DIR"),
-                    'symbols_test.txt'
+                    'symbols.txt'
                 )
         ) as file_handle:
             for line in file_handle:
