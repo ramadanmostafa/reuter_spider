@@ -22,7 +22,7 @@ class ReutersPipeline(object):
         :return: 
         """
         self.cache_file = open(self.cache_file_name, 'wb')
-        self.cache_file.write("[")
+        self.cache_file.write(b"[")
 
     def close_spider(self, spider):
         """
@@ -33,7 +33,7 @@ class ReutersPipeline(object):
         """
         self.cache_file.seek(-2, os.SEEK_END)
         self.cache_file.truncate()
-        self.cache_file.write("]")
+        self.cache_file.write(b"]")
         self.cache_file.close()
 
         # open the file again and insert all items to the database

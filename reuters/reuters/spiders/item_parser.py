@@ -8,7 +8,7 @@ from datetime import datetime
 # constants for xpath rules
 COMPANY_NAME_XPATH = '//*[@id="sectionTitle"]/h1/text()'
 CONSENSUS_ESTIMATES_IS_AVAILABLE_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[2]/div[2]/text()'
-CONSENSUS_ESTIMATES_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[2]/div[2]/table/tbody/tr/td[%d]/text()'
+CONSENSUS_ESTIMATES_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[2]/div[2]/table/tbody/tr/td/text()'
 REVENUE_AND_EARNINGS_TABLE_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[1]/div/div/div[2]/table/tbody/tr/td/text()'
 VALUATION_RATIOS_DATA_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[4]/div[2]/table/tbody/tr/td/text()'
 DIVIDENDS_TABLE_DATA_XPATH = '//*[@id="content"]/div[3]/div/div[2]/div[1]/div[6]/div[2]/table/tbody/tr/td/text()'
@@ -24,16 +24,9 @@ def get_consensus_analysis_data(response, item):
     get CONSENSUS ESTIMATES ANALYSIS table
     it will add 45 value to the item then return it
     """
-    # initialize the table
-    consensus_estimates = [] # estimates, mean, high, low, year_ago
-    for index in range(1, 7):
-        # will append a column each iteration
-        tmp = response.xpath(CONSENSUS_ESTIMATES_XPATH % index).extract()
-        if index == 1:
-            tmp.pop(0)
-            tmp.pop(4)
-        consensus_estimates.append(tmp)
-
+    consensus_estimates = response.xpath(CONSENSUS_ESTIMATES_XPATH).extract()
+    if len(consensus_estimates) == 0:
+        return item
     # list of tuples to help me construct item keys
     columns_names = [
         (
@@ -61,18 +54,24 @@ def get_consensus_analysis_data(response, item):
             "earning_year_ago_box%d"
         ),
     ]
-    # for each column
-    for index1 in range(6):
-        # for each cell in the column
-        for index2 in range(1, 10):
-            if index2 < 5:
-                # it's sales
-                key = columns_names[index1][0] % index2
-            else:
-                # it's earning
-                key = columns_names[index1][1] % (index2 - 4)
-            # add data to the item
-            item[key] = consensus_estimates[index1][index2 - 1]
+
+    earning_flag = False
+    sales_counter = 0
+    earning_counter = 0
+    for cell in consensus_estimates:
+        if cell == 'SALES (in millions)':
+            earning_flag = False
+        elif cell == 'Earnings (per share)':
+            earning_flag = True
+        elif earning_flag:
+            # earning
+            item[columns_names[earning_counter % 6][1] % int(earning_counter / 6 + 1)] = cell
+            earning_counter += 1
+        else:
+            # sales
+            item[columns_names[sales_counter % 6][0] % int(sales_counter / 6 + 1)] = cell
+            sales_counter += 1
+
     return item
 
 
@@ -85,43 +84,63 @@ def get_revenue_table_data(response, item):
     revenue_table_data = response.xpath(REVENUE_AND_EARNINGS_TABLE_XPATH).extract()
     if len(revenue_table_data) < 1:
         return item
+    year_counter = 1
+    month_counter = 1
+    revenue_counter = 1
+    earning_counter = 1
 
-    item["revenue_earnings_per_share_year_box1"] = revenue_table_data[0]
-    item["revenue_earnings_per_share_year_box2"] = revenue_table_data[7]
-    item["revenue_earnings_per_share_year_box3"] = revenue_table_data[20]
-
-    item["revenue_earnings_per_share_month_box1"] = revenue_table_data[1]
-    item["revenue_earnings_per_share_month_box2"] = revenue_table_data[4]
-    item["revenue_earnings_per_share_month_box3"] = revenue_table_data[8]
-    item["revenue_earnings_per_share_month_box4"] = revenue_table_data[11]
-    item["revenue_earnings_per_share_month_box5"] = revenue_table_data[14]
-    item["revenue_earnings_per_share_month_box6"] = revenue_table_data[17]
-    item["revenue_earnings_per_share_month_box7"] = revenue_table_data[21]
-    item["revenue_earnings_per_share_month_box8"] = revenue_table_data[24]
-    item["revenue_earnings_per_share_month_box9"] = revenue_table_data[27]
-    item["revenue_earnings_per_share_month_box10"] = revenue_table_data[30]
-
-    item["revenue_box1"] = revenue_table_data[2]
-    item["revenue_box2"] = revenue_table_data[5]
-    item["revenue_box3"] = revenue_table_data[9]
-    item["revenue_box4"] = revenue_table_data[12]
-    item["revenue_box5"] = revenue_table_data[15]
-    item["revenue_box6"] = revenue_table_data[18]
-    item["revenue_box7"] = revenue_table_data[22]
-    item["revenue_box8"] = revenue_table_data[25]
-    item["revenue_box9"] = revenue_table_data[28]
-    item["revenue_box10"] = revenue_table_data[31]
-
-    item["earnings_per_share_box1"] = revenue_table_data[3]
-    item["earnings_per_share_box2"] = revenue_table_data[6]
-    item["earnings_per_share_box3"] = revenue_table_data[10]
-    item["earnings_per_share_box4"] = revenue_table_data[13]
-    item["earnings_per_share_box5"] = revenue_table_data[16]
-    item["earnings_per_share_box6"] = revenue_table_data[19]
-    item["earnings_per_share_box7"] = revenue_table_data[23]
-    item["earnings_per_share_box8"] = revenue_table_data[26]
-    item["earnings_per_share_box9"] = revenue_table_data[29]
-    item["earnings_per_share_box10"] = revenue_table_data[32]
+    for cell in revenue_table_data:
+        if "FY" in cell:
+            item["revenue_earnings_per_share_year_box{}".format(year_counter)] = cell
+            year_counter += 1
+        elif month_counter == revenue_counter and revenue_counter == earning_counter:
+            item["revenue_earnings_per_share_month_box{}".format(month_counter)] = cell
+            month_counter += 1
+        elif month_counter > revenue_counter == earning_counter:
+            item["revenue_box{}".format(revenue_counter)] = cell
+            revenue_counter += 1
+        elif revenue_counter > earning_counter:
+            item["earnings_per_share_box{}".format(earning_counter)] = cell
+            earning_counter += 1
+    # try:
+    #     item["revenue_earnings_per_share_year_box1"] = revenue_table_data[0]
+    # except:
+    #     pass
+    # item["revenue_earnings_per_share_year_box2"] = revenue_table_data[7]
+    # item["revenue_earnings_per_share_year_box3"] = revenue_table_data[20]
+    #
+    # item["revenue_earnings_per_share_month_box1"] = revenue_table_data[1]
+    # item["revenue_earnings_per_share_month_box2"] = revenue_table_data[4]
+    # item["revenue_earnings_per_share_month_box3"] = revenue_table_data[8]
+    # item["revenue_earnings_per_share_month_box4"] = revenue_table_data[11]
+    # item["revenue_earnings_per_share_month_box5"] = revenue_table_data[14]
+    # item["revenue_earnings_per_share_month_box6"] = revenue_table_data[17]
+    # item["revenue_earnings_per_share_month_box7"] = revenue_table_data[21]
+    # item["revenue_earnings_per_share_month_box8"] = revenue_table_data[24]
+    # item["revenue_earnings_per_share_month_box9"] = revenue_table_data[27]
+    # item["revenue_earnings_per_share_month_box10"] = revenue_table_data[30]
+    #
+    # item["revenue_box1"] = revenue_table_data[2]
+    # item["revenue_box2"] = revenue_table_data[5]
+    # item["revenue_box3"] = revenue_table_data[9]
+    # item["revenue_box4"] = revenue_table_data[12]
+    # item["revenue_box5"] = revenue_table_data[15]
+    # item["revenue_box6"] = revenue_table_data[18]
+    # item["revenue_box7"] = revenue_table_data[22]
+    # item["revenue_box8"] = revenue_table_data[25]
+    # item["revenue_box9"] = revenue_table_data[28]
+    # item["revenue_box10"] = revenue_table_data[31]
+    #
+    # item["earnings_per_share_box1"] = revenue_table_data[3]
+    # item["earnings_per_share_box2"] = revenue_table_data[6]
+    # item["earnings_per_share_box3"] = revenue_table_data[10]
+    # item["earnings_per_share_box4"] = revenue_table_data[13]
+    # item["earnings_per_share_box5"] = revenue_table_data[16]
+    # item["earnings_per_share_box6"] = revenue_table_data[19]
+    # item["earnings_per_share_box7"] = revenue_table_data[23]
+    # item["earnings_per_share_box8"] = revenue_table_data[26]
+    # item["earnings_per_share_box9"] = revenue_table_data[29]
+    # item["earnings_per_share_box10"] = revenue_table_data[32]
 
     return item
 
@@ -482,13 +501,13 @@ def financial_parser(response):
             # CONSENSUS ESTIMATES ANALYSIS table is available in the page
             item["No_consensus_analysis_data_available"] = False
             item = get_consensus_analysis_data(response, item)
-        item = get_revenue_table_data(response, item)
-        item = get_valuation_ratios(response, item)
-        item = get_dividends_data(response, item)
-        item = get_growth_rates_date(response, item)
-        item = get_financial_strength_table_data(response, item)
-        item = get_profitability_ratios_table_data(response, item)
-        item = get_efficiency_table_data(response, item)
-        item = get_management_effectiveness_table_data(response, item)
+        # item = get_revenue_table_data(response, item)
+        # item = get_valuation_ratios(response, item)
+        # item = get_dividends_data(response, item)
+        # item = get_growth_rates_date(response, item)
+        # item = get_financial_strength_table_data(response, item)
+        # item = get_profitability_ratios_table_data(response, item)
+        # item = get_efficiency_table_data(response, item)
+        # item = get_management_effectiveness_table_data(response, item)
 
     return item

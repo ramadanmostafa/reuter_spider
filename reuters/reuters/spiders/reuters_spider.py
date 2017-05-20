@@ -5,7 +5,9 @@ scrapy spider to get financial information from reuters.com based on a specific 
 import os
 import scrapy
 from scrapy.conf import settings
-from item_parser import financial_parser
+from .item_parser import financial_parser
+import logging
+
 
 
 class ReutersSpiderSpider(scrapy.Spider):
@@ -15,22 +17,25 @@ class ReutersSpiderSpider(scrapy.Spider):
     """
     name = "reuters_spider"
     allowed_domains = ["reuters.com"]
-    BASE_URL = "http://www.reuters.com/finance/stocks/financialHighlights?symbol=%s"
+    BASE_URL = "http://www.reuters.com/finance/stocks/financialHighlights?symbol={}"
+
+    def __init__(self, name=None, **kwargs):
+
+
+
+        super(ReutersSpiderSpider, self).__init__(name, **kwargs)
 
     def start_requests(self):
         """
         generate a scrapy request for each symbol from the input file
         :return:
         """
-        with open(
-                os.path.join(
-                    settings.get("BASE_DIR"),
-                    'symbols.txt'
-                )
-        ) as file_handle:
+        symbols_file_path = os.path.join(settings.get("BASE_DIR"), 'symbols_test.txt')
+        with open(symbols_file_path, 'r') as file_handle:
             for line in file_handle:
+                print(self.BASE_URL.format(line.strip()))
                 yield scrapy.Request(
-                    self.BASE_URL % line.strip(),
+                    self.BASE_URL.format(line.strip()),
                     callback=self.parse_page
                 )
 
