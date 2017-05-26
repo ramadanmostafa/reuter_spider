@@ -19,18 +19,12 @@ class ReutersSpiderSpider(scrapy.Spider):
     allowed_domains = ["reuters.com"]
     BASE_URL = "http://www.reuters.com/finance/stocks/financialHighlights?symbol={}"
 
-    def __init__(self, name=None, **kwargs):
-
-
-
-        super(ReutersSpiderSpider, self).__init__(name, **kwargs)
-
     def start_requests(self):
         """
         generate a scrapy request for each symbol from the input file
         :return:
         """
-        symbols_file_path = os.path.join(settings.get("BASE_DIR"), 'symbols_test.txt')
+        symbols_file_path = os.path.join(settings.get("BASE_DIR"), 'symbols.txt')
         with open(symbols_file_path, 'r') as file_handle:
             for line in file_handle:
                 print(self.BASE_URL.format(line.strip()))

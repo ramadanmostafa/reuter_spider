@@ -482,11 +482,414 @@ def get_management_effectiveness_table_data(response, item):
     return item
 
 
+def init_item():
+    """
+    init item to make sure every field has a default value to avoid error when saving data to the db
+    :param item:
+    :return:
+    """
+    item = ReutersItem()
+
+    # information about the page
+    item["response_status"] = ""
+    item["response_url"] = ""
+    item["symbol"] = ""
+    item["date_scrapped"] = ""
+    item["company_name"] = ""
+    item["wrong_symbol"] = ""
+    item["No_consensus_analysis_data_available"] = ""
+
+    # CONSENSUS ESTIMATES ANALYSIS
+    item["sales_consensus_box1"] = ""
+    item["sales_consensus_box2"] = ""
+    item["sales_consensus_box3"] = ""
+    item["sales_consensus_box4"] = ""
+    item["sales_consensus_box5"] = ""
+    item["sales_consensus_box6"] = ""
+    item["sales_consensus_box7"] = ""
+    item["earning_consensus_box1"] = ""
+    item["earning_consensus_box2"] = ""
+    item["earning_consensus_box3"] = ""
+    item["earning_consensus_box4"] = ""
+    item["earning_consensus_box5"] = ""
+    item["earning_consensus_box6"] = ""
+    item["earning_consensus_box7"] = ""
+
+    item["sales_estimates_box1"] = ""
+    item["sales_estimates_box2"] = ""
+    item["sales_estimates_box3"] = ""
+    item["sales_estimates_box4"] = ""
+    item["sales_estimates_box5"] = ""
+    item["sales_estimates_box6"] = ""
+    item["sales_estimates_box7"] = ""
+    item["earning_estimates_box1"] = ""
+    item["earning_estimates_box2"] = ""
+    item["earning_estimates_box3"] = ""
+    item["earning_estimates_box4"] = ""
+    item["earning_estimates_box5"] = ""
+    item["earning_estimates_box6"] = ""
+    item["earning_estimates_box7"] = ""
+
+    item["sales_mean_box1"] = ""
+    item["sales_mean_box2"] = ""
+    item["sales_mean_box3"] = ""
+    item["sales_mean_box4"] = ""
+    item["sales_mean_box5"] = ""
+    item["sales_mean_box6"] = ""
+    item["sales_mean_box7"] = ""
+    item["earning_mean_box1"] = ""
+    item["earning_mean_box2"] = ""
+    item["earning_mean_box3"] = ""
+    item["earning_mean_box4"] = ""
+    item["earning_mean_box5"] = ""
+    item["earning_mean_box6"] = ""
+    item["earning_mean_box7"] = ""
+
+    item["sales_high_box1"] = ""
+    item["sales_high_box2"] = ""
+    item["sales_high_box3"] = ""
+    item["sales_high_box4"] = ""
+    item["sales_high_box5"] = ""
+    item["sales_high_box6"] = ""
+    item["sales_high_box7"] = ""
+    item["earning_high_box1"] = ""
+    item["earning_high_box2"] = ""
+    item["earning_high_box3"] = ""
+    item["earning_high_box4"] = ""
+    item["earning_high_box5"] = ""
+    item["earning_high_box6"] = ""
+    item["earning_high_box7"] = ""
+
+    item["sales_low_box1"] = ""
+    item["sales_low_box2"] = ""
+    item["sales_low_box3"] = ""
+    item["sales_low_box4"] = ""
+    item["sales_low_box5"] = ""
+    item["sales_low_box6"] = ""
+    item["sales_low_box7"] = ""
+    item["earning_low_box1"] = ""
+    item["earning_low_box2"] = ""
+    item["earning_low_box3"] = ""
+    item["earning_low_box4"] = ""
+    item["earning_low_box5"] = ""
+    item["earning_low_box6"] = ""
+    item["earning_low_box7"] = ""
+
+    item["sales_year_ago_box1"] = ""
+    item["sales_year_ago_box2"] = ""
+    item["sales_year_ago_box3"] = ""
+    item["sales_year_ago_box4"] = ""
+    item["sales_year_ago_box5"] = ""
+    item["sales_year_ago_box6"] = ""
+    item["sales_year_ago_box7"] = ""
+    item["earning_year_ago_box1"] = ""
+    item["earning_year_ago_box2"] = ""
+    item["earning_year_ago_box3"] = ""
+    item["earning_year_ago_box4"] = ""
+    item["earning_year_ago_box5"] = ""
+    item["earning_year_ago_box6"] = ""
+    item["earning_year_ago_box7"] = ""
+
+    # # REVENUE & EARNINGS PER SHARE
+    item["revenue_earnings_per_share_year_box1"] = ""
+    item["revenue_earnings_per_share_year_box2"] = ""
+    item["revenue_earnings_per_share_year_box3"] = ""
+    item["revenue_earnings_per_share_year_box4"] = ""
+
+    item["revenue_earnings_per_share_month_box1"] = ""
+    item["revenue_earnings_per_share_month_box2"] = ""
+    item["revenue_earnings_per_share_month_box3"] = ""
+    item["revenue_earnings_per_share_month_box4"] = ""
+    item["revenue_earnings_per_share_month_box5"] = ""
+    item["revenue_earnings_per_share_month_box6"] = ""
+    item["revenue_earnings_per_share_month_box7"] = ""
+    item["revenue_earnings_per_share_month_box8"] = ""
+    item["revenue_earnings_per_share_month_box9"] = ""
+    item["revenue_earnings_per_share_month_box10"] = ""
+    item["revenue_earnings_per_share_month_box11"] = ""
+    item["revenue_earnings_per_share_month_box12"] = ""
+    item["revenue_earnings_per_share_month_box13"] = ""
+
+    item["revenue_box1"] = ""
+    item["revenue_box2"] = ""
+    item["revenue_box3"] = ""
+    item["revenue_box4"] = ""
+    item["revenue_box5"] = ""
+    item["revenue_box6"] = ""
+    item["revenue_box7"] = ""
+    item["revenue_box8"] = ""
+    item["revenue_box9"] = ""
+    item["revenue_box10"] = ""
+    item["revenue_box11"] = ""
+    item["revenue_box12"] = ""
+    item["revenue_box13"] = ""
+
+    item["earnings_per_share_box1"] = ""
+    item["earnings_per_share_box2"] = ""
+    item["earnings_per_share_box3"] = ""
+    item["earnings_per_share_box4"] = ""
+    item["earnings_per_share_box5"] = ""
+    item["earnings_per_share_box6"] = ""
+    item["earnings_per_share_box7"] = ""
+    item["earnings_per_share_box8"] = ""
+    item["earnings_per_share_box9"] = ""
+    item["earnings_per_share_box10"] = ""
+    item["earnings_per_share_box11"] = ""
+    item["earnings_per_share_box12"] = ""
+    item["earnings_per_share_box13"] = ""
+
+    # VALUATION RATIOS
+    item["valuation_ratios_name_box1"] = ""
+    item["valuation_ratios_company_box1"] = ""
+    item["valuation_ratios_industry_box1"] = ""
+    item["valuation_ratios_sector_box1"] = ""
+
+    item["valuation_ratios_name_box2"] = ""
+    item["valuation_ratios_company_box2"] = ""
+    item["valuation_ratios_industry_box2"] = ""
+    item["valuation_ratios_sector_box2"] = ""
+
+    item["valuation_ratios_name_box3"] = ""
+    item["valuation_ratios_company_box3"] = ""
+    item["valuation_ratios_industry_box3"] = ""
+    item["valuation_ratios_sector_box3"] = ""
+
+    item["valuation_ratios_name_box4"] = ""
+    item["valuation_ratios_company_box4"] = ""
+    item["valuation_ratios_industry_box4"] = ""
+    item["valuation_ratios_sector_box4"] = ""
+
+    item["valuation_ratios_name_box5"] = ""
+    item["valuation_ratios_company_box5"] = ""
+    item["valuation_ratios_industry_box5"] = ""
+    item["valuation_ratios_sector_box5"] = ""
+
+    item["valuation_ratios_name_box6"] = ""
+    item["valuation_ratios_company_box6"] = ""
+    item["valuation_ratios_industry_box6"] = ""
+    item["valuation_ratios_sector_box6"] = ""
+
+    item["valuation_ratios_name_box7"] = ""
+    item["valuation_ratios_company_box7"] = ""
+    item["valuation_ratios_industry_box7"] = ""
+    item["valuation_ratios_sector_box7"] = ""
+
+    item["valuation_ratios_name_box8"] = ""
+    item["valuation_ratios_company_box8"] = ""
+    item["valuation_ratios_industry_box8"] = ""
+    item["valuation_ratios_sector_box8"] = ""
+
+    item["valuation_ratios_name_box9"] = ""
+    item["valuation_ratios_company_box9"] = ""
+    item["valuation_ratios_industry_box9"] = ""
+    item["valuation_ratios_sector_box9"] = ""
+
+    # dividends
+    item["dividends_name_box1"] = ""
+    item["dividends_company_box1"] = ""
+    item["dividends_industry_box1"] = ""
+    item["dividends_sector_box1"] = ""
+
+    item["dividends_name_box2"] = ""
+    item["dividends_company_box2"] = ""
+    item["dividends_industry_box2"] = ""
+    item["dividends_sector_box2"] = ""
+
+    item["dividends_name_box3"] = ""
+    item["dividends_company_box3"] = ""
+    item["dividends_industry_box3"] = ""
+    item["dividends_sector_box3"] = ""
+
+    item["dividends_name_box4"] = ""
+    item["dividends_company_box4"] = ""
+    item["dividends_industry_box4"] = ""
+    item["dividends_sector_box4"] = ""
+
+    # GROWTH RATES
+    item["growth_rates_name_box1"] = ""
+    item["growth_rates_name_box2"] = ""
+    item["growth_rates_name_box3"] = ""
+    item["growth_rates_name_box4"] = ""
+    item["growth_rates_name_box5"] = ""
+    item["growth_rates_name_box6"] = ""
+    item["growth_rates_name_box7"] = ""
+
+    item["growth_rates_company_box1"] = ""
+    item["growth_rates_company_box2"] = ""
+    item["growth_rates_company_box3"] = ""
+    item["growth_rates_company_box4"] = ""
+    item["growth_rates_company_box5"] = ""
+    item["growth_rates_company_box6"] = ""
+    item["growth_rates_company_box7"] = ""
+
+    item["growth_rates_industry_box1"] = ""
+    item["growth_rates_industry_box2"] = ""
+    item["growth_rates_industry_box3"] = ""
+    item["growth_rates_industry_box4"] = ""
+    item["growth_rates_industry_box5"] = ""
+    item["growth_rates_industry_box6"] = ""
+    item["growth_rates_industry_box7"] = ""
+
+    item["growth_rates_sector_box1"] = ""
+    item["growth_rates_sector_box2"] = ""
+    item["growth_rates_sector_box3"] = ""
+    item["growth_rates_sector_box4"] = ""
+    item["growth_rates_sector_box5"] = ""
+    item["growth_rates_sector_box6"] = ""
+    item["growth_rates_sector_box7"] = ""
+
+    # FINANCIAL STRENGTH
+    item["financial_strength_name_box1"] = ""
+    item["financial_strength_company_box1"] = ""
+    item["financial_strength_industry_box1"] = ""
+    item["financial_strength_sector_box1"] = ""
+
+    item["financial_strength_name_box2"] = ""
+    item["financial_strength_company_box2"] = ""
+    item["financial_strength_industry_box2"] = ""
+    item["financial_strength_sector_box2"] = ""
+
+    item["financial_strength_name_box3"] = ""
+    item["financial_strength_company_box3"] = ""
+    item["financial_strength_industry_box3"] = ""
+    item["financial_strength_sector_box3"] = ""
+
+    item["financial_strength_name_box4"] = ""
+    item["financial_strength_company_box4"] = ""
+    item["financial_strength_industry_box4"] = ""
+    item["financial_strength_sector_box4"] = ""
+
+    item["financial_strength_name_box5"] = ""
+    item["financial_strength_company_box5"] = ""
+    item["financial_strength_industry_box5"] = ""
+    item["financial_strength_sector_box5"] = ""
+
+    # PROFITABILITY RATIOS
+    item["profitability_ratios_name_box1"] = ""
+    item["profitability_ratios_company_box1"] = ""
+    item["profitability_ratios_industry_box1"] = ""
+    item["profitability_ratios_sector_box1"] = ""
+
+    item["profitability_ratios_name_box2"] = ""
+    item["profitability_ratios_company_box2"] = ""
+    item["profitability_ratios_industry_box2"] = ""
+    item["profitability_ratios_sector_box2"] = ""
+
+    item["profitability_ratios_name_box3"] = ""
+    item["profitability_ratios_company_box3"] = ""
+    item["profitability_ratios_industry_box3"] = ""
+    item["profitability_ratios_sector_box3"] = ""
+
+    item["profitability_ratios_name_box4"] = ""
+    item["profitability_ratios_company_box4"] = ""
+    item["profitability_ratios_industry_box4"] = ""
+    item["profitability_ratios_sector_box4"] = ""
+
+    item["profitability_ratios_name_box5"] = ""
+    item["profitability_ratios_company_box5"] = ""
+    item["profitability_ratios_industry_box5"] = ""
+    item["profitability_ratios_sector_box5"] = ""
+
+    item["profitability_ratios_name_box6"] = ""
+    item["profitability_ratios_company_box6"] = ""
+    item["profitability_ratios_industry_box6"] = ""
+    item["profitability_ratios_sector_box6"] = ""
+
+    item["profitability_ratios_name_box7"] = ""
+    item["profitability_ratios_company_box7"] = ""
+    item["profitability_ratios_industry_box7"] = ""
+    item["profitability_ratios_sector_box7"] = ""
+
+    item["profitability_ratios_name_box8"] = ""
+    item["profitability_ratios_company_box8"] = ""
+    item["profitability_ratios_industry_box8"] = ""
+    item["profitability_ratios_sector_box8"] = ""
+
+    item["profitability_ratios_name_box9"] = ""
+    item["profitability_ratios_company_box9"] = ""
+    item["profitability_ratios_industry_box9"] = ""
+    item["profitability_ratios_sector_box9"] = ""
+
+    item["profitability_ratios_name_box10"] = ""
+    item["profitability_ratios_company_box10"] = ""
+    item["profitability_ratios_industry_box10"] = ""
+    item["profitability_ratios_sector_box10"] = ""
+
+    item["profitability_ratios_name_box11"] = ""
+    item["profitability_ratios_company_box11"] = ""
+    item["profitability_ratios_industry_box11"] = ""
+    item["profitability_ratios_sector_box11"] = ""
+
+    item["profitability_ratios_name_box12"] = ""
+    item["profitability_ratios_company_box12"] = ""
+    item["profitability_ratios_industry_box12"] = ""
+    item["profitability_ratios_sector_box12"] = ""
+
+    # EFFICIENCY
+    item["efficiency_name_box1"] = ""
+    item["efficiency_company_box1"] = ""
+    item["efficiency_industry_box1"] = ""
+    item["efficiency_sector_box1"] = ""
+
+    item["efficiency_name_box2"] = ""
+    item["efficiency_company_box2"] = ""
+    item["efficiency_industry_box2"] = ""
+    item["efficiency_sector_box2"] = ""
+
+    item["efficiency_name_box3"] = ""
+    item["efficiency_company_box3"] = ""
+    item["efficiency_industry_box3"] = ""
+    item["efficiency_sector_box3"] = ""
+
+    item["efficiency_name_box4"] = ""
+    item["efficiency_company_box4"] = ""
+    item["efficiency_industry_box4"] = ""
+    item["efficiency_sector_box4"] = ""
+
+    item["efficiency_name_box5"] = ""
+    item["efficiency_company_box5"] = ""
+    item["efficiency_industry_box5"] = ""
+    item["efficiency_sector_box5"] = ""
+
+    # MANAGEMENT EFFECTIVENESS
+    item["management_effectiveness_name_box1"] = ""
+    item["management_effectiveness_company_box1"] = ""
+    item["management_effectiveness_industry_box1"] = ""
+    item["management_effectiveness_sector_box1"] = ""
+
+    item["management_effectiveness_name_box2"] = ""
+    item["management_effectiveness_company_box2"] = ""
+    item["management_effectiveness_industry_box2"] = ""
+    item["management_effectiveness_sector_box2"] = ""
+
+    item["management_effectiveness_name_box3"] = ""
+    item["management_effectiveness_company_box3"] = ""
+    item["management_effectiveness_industry_box3"] = ""
+    item["management_effectiveness_sector_box3"] = ""
+
+    item["management_effectiveness_name_box4"] = ""
+    item["management_effectiveness_company_box4"] = ""
+    item["management_effectiveness_industry_box4"] = ""
+    item["management_effectiveness_sector_box4"] = ""
+
+    item["management_effectiveness_name_box5"] = ""
+    item["management_effectiveness_company_box5"] = ""
+    item["management_effectiveness_industry_box5"] = ""
+    item["management_effectiveness_sector_box5"] = ""
+
+    item["management_effectiveness_name_box6"] = ""
+    item["management_effectiveness_company_box6"] = ""
+    item["management_effectiveness_industry_box6"] = ""
+    item["management_effectiveness_sector_box6"] = ""
+
+    return item
+
+
 def financial_parser(response):
     """
     take the response from reuter_spider and return a ReutersItem
     """
-    item = ReutersItem()
+    item = init_item()
     item["wrong_symbol"] = False
     item["response_status"] = response.status
     item["response_url"] = response.url
@@ -501,13 +904,13 @@ def financial_parser(response):
             # CONSENSUS ESTIMATES ANALYSIS table is available in the page
             item["No_consensus_analysis_data_available"] = False
             item = get_consensus_analysis_data(response, item)
-        # item = get_revenue_table_data(response, item)
-        # item = get_valuation_ratios(response, item)
-        # item = get_dividends_data(response, item)
-        # item = get_growth_rates_date(response, item)
-        # item = get_financial_strength_table_data(response, item)
-        # item = get_profitability_ratios_table_data(response, item)
-        # item = get_efficiency_table_data(response, item)
-        # item = get_management_effectiveness_table_data(response, item)
+        item = get_revenue_table_data(response, item)
+        item = get_valuation_ratios(response, item)
+        item = get_dividends_data(response, item)
+        item = get_growth_rates_date(response, item)
+        item = get_financial_strength_table_data(response, item)
+        item = get_profitability_ratios_table_data(response, item)
+        item = get_efficiency_table_data(response, item)
+        item = get_management_effectiveness_table_data(response, item)
 
     return item
