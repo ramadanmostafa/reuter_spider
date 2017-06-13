@@ -27,10 +27,10 @@ class ReutersPipeline(object):
             date_scrapped=item["date_scrapped"],
             company_name=item["company_name"],
         )
-        if pages_info_table.symbol_in_pages_info_table():
-            pages_info_table.update_record_pages_info_table()
-        else:
-            pages_info_table.insert_record_pages_info_table()
+        # if pages_info_table.symbol_in_pages_info_table():
+        #     pages_info_table.update_record_pages_info_table()
+        # else:
+        pages_info_table.insert_record_pages_info_table()
 
         del pages_info_table
         consensus_table = ReutersDBConsensusTable(
@@ -124,12 +124,13 @@ class ReutersPipeline(object):
             item["earning_year_ago_box4"],
             item["earning_year_ago_box5"],
             item["earning_year_ago_box6"],
-            item["earning_year_ago_box7"]
+            item["earning_year_ago_box7"],
+            date_scrapped=item["date_scrapped"]
         )
-        if consensus_table.symbol_in_consensus_table():
-            consensus_table.update_record_consensus_table()
-        else:
-            consensus_table.insert_record_consensus_table()
+        # if consensus_table.symbol_in_consensus_table():
+        #     consensus_table.update_record_consensus_table()
+        # else:
+        consensus_table.insert_record_consensus_table()
 
         del consensus_table
 
@@ -180,12 +181,10 @@ class ReutersPipeline(object):
             item["earnings_per_share_box10"],
             item["earnings_per_share_box11"],
             item["earnings_per_share_box12"],
-            item["earnings_per_share_box1"]
+            item["earnings_per_share_box1"],
+            date_scrapped=item["date_scrapped"]
         )
-        if revenue_table.symbol_in_revenue_table():
-            revenue_table.update_record_revenue_table()
-        else:
-            revenue_table.insert_record_revenue_table()
+        revenue_table.insert_record_revenue_table()
         del revenue_table
 
         valuation_ratios_table = ReutersDBValuationRatiosTable(
@@ -225,12 +224,10 @@ class ReutersPipeline(object):
             item["valuation_ratios_name_box9"],
             item["valuation_ratios_company_box9"],
             item["valuation_ratios_industry_box9"],
-            item["valuation_ratios_sector_box9"]
+            item["valuation_ratios_sector_box9"],
+            date_scrapped=item["date_scrapped"]
         )
-        if valuation_ratios_table.symbol_in_valuation_ratios_table():
-            valuation_ratios_table.update_record_valuation_ratios_table()
-        else:
-            valuation_ratios_table.insert_record_valuation_ratios_table()
+        valuation_ratios_table.insert_record_valuation_ratios_table()
         del valuation_ratios_table
 
         dividends_table = ReutersDBDividendsTable(
@@ -250,12 +247,10 @@ class ReutersPipeline(object):
             item["dividends_name_box4"],
             item["dividends_company_box4"],
             item["dividends_industry_box4"],
-            item["dividends_sector_box4"]
+            item["dividends_sector_box4"],
+            date_scrapped=item["date_scrapped"]
         )
-        if dividends_table.symbol_in_dividends_table():
-            dividends_table.update_record_dividends_table()
-        else:
-            dividends_table.insert_record_dividends_table()
+        dividends_table.insert_record_dividends_table()
         del dividends_table
 
         efficiency_table = ReutersDBEfficiencyTable(
@@ -283,12 +278,10 @@ class ReutersPipeline(object):
             item["efficiency_name_box5"],
             item["efficiency_company_box5"],
             item["efficiency_industry_box5"],
-            item["efficiency_sector_box5"]
+            item["efficiency_sector_box5"],
+            date_scrapped=item["date_scrapped"]
         )
-        if efficiency_table.symbol_in_efficiency_table():
-            efficiency_table.update_record_efficiency_table()
-        else:
-            efficiency_table.insert_record_efficiency_table()
+        efficiency_table.insert_record_efficiency_table()
 
         del efficiency_table
 
@@ -317,12 +310,10 @@ class ReutersPipeline(object):
             item["financial_strength_name_box5"],
             item["financial_strength_company_box5"],
             item["financial_strength_industry_box5"],
-            item["financial_strength_sector_box5"]
+            item["financial_strength_sector_box5"],
+            date_scrapped=item["date_scrapped"]
         )
-        if financial_strength_table.symbol_in_financial_strength_table():
-            financial_strength_table.update_record_financial_strength_table()
-        else:
-            financial_strength_table.insert_record_financial_strength_table()
+        financial_strength_table.insert_record_financial_strength_table()
 
         del financial_strength_table
 
@@ -358,12 +349,10 @@ class ReutersPipeline(object):
             item["growth_rates_sector_box4"],
             item["growth_rates_sector_box5"],
             item["growth_rates_sector_box6"],
-            item["growth_rates_sector_box7"]
+            item["growth_rates_sector_box7"],
+            date_scrapped=item["date_scrapped"]
         )
-        if growth_rates_table.symbol_in_growth_rates_table():
-            growth_rates_table.update_record_growth_rates_table()
-        else:
-            growth_rates_table.insert_record_growth_rates_table()
+        growth_rates_table.insert_record_growth_rates_table()
 
         del growth_rates_table
 
@@ -397,12 +386,10 @@ class ReutersPipeline(object):
             item["management_effectiveness_name_box6"],
             item["management_effectiveness_company_box6"],
             item["management_effectiveness_industry_box6"],
-            item["management_effectiveness_sector_box6"]
+            item["management_effectiveness_sector_box6"],
+            date_scrapped=item["date_scrapped"]
         )
-        if effectiveness_table.symbol_in_management_effectiveness_table():
-            effectiveness_table.update_record_management_effectiveness_table()
-        else:
-            effectiveness_table.insert_record_management_effectiveness_table()
+        effectiveness_table.insert_record_management_effectiveness_table()
 
         del effectiveness_table
 
@@ -466,12 +453,10 @@ class ReutersPipeline(object):
             item["profitability_ratios_name_box12"],
             item["profitability_ratios_company_box12"],
             item["profitability_ratios_industry_box12"],
-            item["profitability_ratios_sector_box12"]
+            item["profitability_ratios_sector_box12"],
+            date_scrapped=item["date_scrapped"]
         )
-        if profitability_ratios_table.symbol_in_profitability_ratios_table():
-            profitability_ratios_table.update_record_profitability_ratios_table()
-        else:
-            profitability_ratios_table.insert_record_profitability_ratios_table()
+        profitability_ratios_table.insert_record_profitability_ratios_table()
 
         del profitability_ratios_table
         return item

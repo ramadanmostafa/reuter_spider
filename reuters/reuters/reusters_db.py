@@ -194,7 +194,8 @@ class ReutersDBConsensusTable(ReutersDBConnection):
         earning_year_ago_box4,
         earning_year_ago_box5,
         earning_year_ago_box6,
-        earning_year_ago_box7
+        earning_year_ago_box7,
+        date_scrapped
     ):
         self.symbol = symbol
         self.No_consensus_analysis_data_available = No_consensus_analysis_data_available
@@ -287,6 +288,7 @@ class ReutersDBConsensusTable(ReutersDBConnection):
         self.earning_year_ago_box5 = earning_year_ago_box5
         self.earning_year_ago_box6 = earning_year_ago_box6
         self.earning_year_ago_box7 = earning_year_ago_box7
+        self.date_scrapped = date_scrapped
 
 
     def insert_record_consensus_table(self):
@@ -379,12 +381,14 @@ class ReutersDBConsensusTable(ReutersDBConnection):
                         earning_year_ago_box4,
                         earning_year_ago_box5,
                         earning_year_ago_box6,
-                        earning_year_ago_box7
+                        earning_year_ago_box7,
+                        date_scrapped
+
                     )
                     values (
                     ?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,
                     ?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,
-                    ?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?
+                    ?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?,?
                     )
                 """
         cur.execute(
@@ -474,7 +478,8 @@ class ReutersDBConsensusTable(ReutersDBConnection):
                 self.earning_year_ago_box4,
                 self.earning_year_ago_box5,
                 self.earning_year_ago_box6,
-                self.earning_year_ago_box7
+                self.earning_year_ago_box7,
+                self.date_scrapped
             )
         )
         conn.commit()
@@ -726,7 +731,8 @@ class ReutersDBRevenueTable(ReutersDBConnection):
             earnings_per_share_box10,
             earnings_per_share_box11,
             earnings_per_share_box12,
-            earnings_per_share_box13
+            earnings_per_share_box13,
+            date_scrapped
     ):
         self.symbol = symbol
         self.revenue_earnings_per_share_year_box1 = revenue_earnings_per_share_year_box1
@@ -772,6 +778,7 @@ class ReutersDBRevenueTable(ReutersDBConnection):
         self.earnings_per_share_box11 = earnings_per_share_box11
         self.earnings_per_share_box12 = earnings_per_share_box12
         self.earnings_per_share_box13 = earnings_per_share_box13
+        self.date_scrapped = date_scrapped
 
     def insert_record_revenue_table(self):
 
@@ -822,11 +829,12 @@ class ReutersDBRevenueTable(ReutersDBConnection):
                 earnings_per_share_box10,
                 earnings_per_share_box11,
                 earnings_per_share_box12,
-                earnings_per_share_box13
+                earnings_per_share_box13,
+                date_scrapped
             ) values (
 			?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,
-			?, ?, ?
+			?, ?, ?,?
 		)
         """
         cur.execute(
@@ -874,7 +882,8 @@ class ReutersDBRevenueTable(ReutersDBConnection):
                 self.earnings_per_share_box10,
                 self.earnings_per_share_box11,
                 self.earnings_per_share_box12,
-                self.earnings_per_share_box13
+                self.earnings_per_share_box13,
+                self.date_scrapped
             )
         )
         conn.commit()
@@ -1036,7 +1045,8 @@ class ReutersDBValuationRatiosTable(ReutersDBConnection):
             valuation_ratios_name_box9,
             valuation_ratios_company_box9,
             valuation_ratios_industry_box9,
-            valuation_ratios_sector_box9
+            valuation_ratios_sector_box9,
+            date_scrapped
     ):
         self.symbol = symbol
         self.valuation_ratios_name_box1 = valuation_ratios_name_box1
@@ -1075,6 +1085,7 @@ class ReutersDBValuationRatiosTable(ReutersDBConnection):
         self.valuation_ratios_company_box9 = valuation_ratios_company_box9
         self.valuation_ratios_industry_box9 = valuation_ratios_industry_box9
         self.valuation_ratios_sector_box9 = valuation_ratios_sector_box9
+        self.date_scrapped = date_scrapped
 
 
     def insert_record_valuation_ratios_table(self):
@@ -1119,11 +1130,12 @@ class ReutersDBValuationRatiosTable(ReutersDBConnection):
                 valuation_ratios_name_box9,
                 valuation_ratios_company_box9,
                 valuation_ratios_industry_box9,
-                valuation_ratios_sector_box9
+                valuation_ratios_sector_box9,
+                date_scrapped
             )
             values (?,?,?,?,?,?,?,?,?,?,
             ?,?,?,?,?,?,?,?,?,?,
-            ?,?,?,?,?,?,?,?,?,?,
+            ?,?,?,?,?,?,?,?,?,?,?,
             ?,?,?,?,?,?,?)
         """
         cur.execute(
@@ -1164,7 +1176,8 @@ class ReutersDBValuationRatiosTable(ReutersDBConnection):
                 self.valuation_ratios_name_box9,
                 self.valuation_ratios_company_box9,
                 self.valuation_ratios_industry_box9,
-                self.valuation_ratios_sector_box9
+                self.valuation_ratios_sector_box9,
+                self.date_scrapped
             )
         )
         conn.commit()
@@ -1292,7 +1305,8 @@ class ReutersDBDividendsTable(ReutersDBConnection):
             dividends_name_box4,
             dividends_company_box4,
             dividends_industry_box4,
-            dividends_sector_box4
+            dividends_sector_box4,
+            date_scrapped
     ):
         self.symbol = symbol
         self.dividends_name_box1 = dividends_name_box1
@@ -1311,6 +1325,7 @@ class ReutersDBDividendsTable(ReutersDBConnection):
         self.dividends_company_box4 = dividends_company_box4
         self.dividends_industry_box4 = dividends_industry_box4
         self.dividends_sector_box4 = dividends_sector_box4
+        self.date_scrapped = date_scrapped
 
     def insert_record_dividends_table(self):
 
@@ -1334,9 +1349,10 @@ class ReutersDBDividendsTable(ReutersDBConnection):
                 dividends_name_box4,
                 dividends_company_box4,
                 dividends_industry_box4,
-                dividends_sector_box4
+                dividends_sector_box4,
+                date_scrapped
             )
-            values (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)
+            values (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?)
         """
         cur.execute(
             sql_query, (
@@ -1356,7 +1372,8 @@ class ReutersDBDividendsTable(ReutersDBConnection):
                 self.dividends_name_box4,
                 self.dividends_company_box4,
                 self.dividends_industry_box4,
-                self.dividends_sector_box4
+                self.dividends_sector_box4,
+                self.date_scrapped
             )
         )
         conn.commit()
@@ -1461,6 +1478,7 @@ class ReutersDBGrowthRatesTable(ReutersDBConnection):
             growth_rates_sector_box5,
             growth_rates_sector_box6,
             growth_rates_sector_box7,
+            date_scrapped
     ):
         self.symbol = symbol
         self.growth_rates_name_box1 = growth_rates_name_box1
@@ -1491,6 +1509,7 @@ class ReutersDBGrowthRatesTable(ReutersDBConnection):
         self.growth_rates_sector_box5 = growth_rates_sector_box5
         self.growth_rates_sector_box6 = growth_rates_sector_box6
         self.growth_rates_sector_box7 = growth_rates_sector_box7
+        self.date_scrapped = date_scrapped
 
     def insert_record_growth_rates_table(self):
 
@@ -1530,10 +1549,11 @@ class ReutersDBGrowthRatesTable(ReutersDBConnection):
                 growth_rates_sector_box4,
                 growth_rates_sector_box5,
                 growth_rates_sector_box6,
-                growth_rates_sector_box7
+                growth_rates_sector_box7,
+                date_scrapped
             )
             values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-            ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """
         cur.execute(
             sql_query, (
@@ -1565,7 +1585,8 @@ class ReutersDBGrowthRatesTable(ReutersDBConnection):
                 self.growth_rates_sector_box4,
                 self.growth_rates_sector_box5,
                 self.growth_rates_sector_box6,
-                self.growth_rates_sector_box7
+                self.growth_rates_sector_box7,
+                self.date_scrapped
             )
         )
         conn.commit()
@@ -1686,7 +1707,8 @@ class ReutersDBFinancialStrengthTable(ReutersDBConnection):
             financial_strength_name_box5,
             financial_strength_company_box5,
             financial_strength_industry_box5,
-            financial_strength_sector_box5
+            financial_strength_sector_box5,
+            date_scrapped
     ):
         self.symbol = symbol
         self.financial_strength_name_box1 = financial_strength_name_box1
@@ -1709,6 +1731,7 @@ class ReutersDBFinancialStrengthTable(ReutersDBConnection):
         self.financial_strength_company_box5 = financial_strength_company_box5
         self.financial_strength_industry_box5 = financial_strength_industry_box5
         self.financial_strength_sector_box5 = financial_strength_sector_box5
+        self.date_scrapped = date_scrapped
 
     def insert_record_financial_strength_table(self):
 
@@ -1740,9 +1763,10 @@ class ReutersDBFinancialStrengthTable(ReutersDBConnection):
                 financial_strength_name_box5,
                 financial_strength_company_box5,
                 financial_strength_industry_box5,
-                financial_strength_sector_box5
+                financial_strength_sector_box5,
+                date_scrapped
             )
-            values (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?,?,?)
+            values (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?,?,?, ?)
         """
         cur.execute(
             sql_query, (
@@ -1766,7 +1790,8 @@ class ReutersDBFinancialStrengthTable(ReutersDBConnection):
                 self.financial_strength_name_box5,
                 self.financial_strength_company_box5,
                 self.financial_strength_industry_box5,
-                self.financial_strength_sector_box5
+                self.financial_strength_sector_box5,
+                self.date_scrapped
             )
         )
         conn.commit()
@@ -1910,7 +1935,8 @@ class ReutersDBProfitabilityRatiosTable(ReutersDBConnection):
             profitability_ratios_name_box12,
             profitability_ratios_company_box12,
             profitability_ratios_industry_box12,
-            profitability_ratios_sector_box12
+            profitability_ratios_sector_box12,
+            date_scrapped
     ):
         self.symbol = symbol
         self.profitability_ratios_name_box1 = profitability_ratios_name_box1
@@ -1961,6 +1987,7 @@ class ReutersDBProfitabilityRatiosTable(ReutersDBConnection):
         self.profitability_ratios_company_box12 = profitability_ratios_company_box12
         self.profitability_ratios_industry_box12 = profitability_ratios_industry_box12
         self.profitability_ratios_sector_box12 = profitability_ratios_sector_box12
+        self.date_scrapped = date_scrapped
 
     def insert_record_profitability_ratios_table(self):
 
@@ -2028,10 +2055,11 @@ class ReutersDBProfitabilityRatiosTable(ReutersDBConnection):
                 profitability_ratios_name_box12,
                 profitability_ratios_company_box12,
                 profitability_ratios_industry_box12,
-                profitability_ratios_sector_box12
+                profitability_ratios_sector_box12,
+                date_scrapped
             )
             values (?, ?, ?, ?, ?, ?,?,?,?,?,?, ?, ?, ?, ?, ?,?,?,?,?,?, ?, ?, ?, ?, ?,?,?,?,?,
-            ?, ?, ?, ?, ?, ?,?,?,?,?,?, ?, ?, ?, ?, ?,?,?,?)
+            ?, ?, ?, ?, ?, ?,?,?,?,?,?, ?, ?, ?, ?, ?,?,?,?,?)
         """
         cur.execute(
             sql_query, (
@@ -2083,7 +2111,8 @@ class ReutersDBProfitabilityRatiosTable(ReutersDBConnection):
                 self.profitability_ratios_name_box12,
                 self.profitability_ratios_company_box12,
                 self.profitability_ratios_industry_box12,
-                self.profitability_ratios_sector_box12
+                self.profitability_ratios_sector_box12,
+                self.date_scrapped
             )
         )
         conn.commit()
@@ -2256,7 +2285,8 @@ class ReutersDBEfficiencyTable(ReutersDBConnection):
             efficiency_name_box5,
             efficiency_company_box5,
             efficiency_industry_box5,
-            efficiency_sector_box5
+            efficiency_sector_box5,
+            date_scrapped
     ):
         self.symbol = symbol
         self.efficiency_name_box1 = efficiency_name_box1
@@ -2279,6 +2309,7 @@ class ReutersDBEfficiencyTable(ReutersDBConnection):
         self.efficiency_company_box5 = efficiency_company_box5
         self.efficiency_industry_box5 = efficiency_industry_box5
         self.efficiency_sector_box5 = efficiency_sector_box5
+        self.date_scrapped = date_scrapped
 
     def insert_record_efficiency_table(self):
 
@@ -2311,9 +2342,10 @@ class ReutersDBEfficiencyTable(ReutersDBConnection):
                 efficiency_name_box5,
                 efficiency_company_box5,
                 efficiency_industry_box5,
-                efficiency_sector_box5
+                efficiency_sector_box5,
+                date_scrapped
             )
-            values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?)
+            values (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?,?)
         """
         cur.execute(
             sql_query, (
@@ -2337,7 +2369,8 @@ class ReutersDBEfficiencyTable(ReutersDBConnection):
                 self.efficiency_name_box5,
                 self.efficiency_company_box5,
                 self.efficiency_industry_box5,
-                self.efficiency_sector_box5
+                self.efficiency_sector_box5,
+                self.date_scrapped
             )
         )
         conn.commit()
@@ -2451,7 +2484,8 @@ class ReutersDBManagementEffectivenessTable(ReutersDBConnection):
             management_effectiveness_name_box6,
             management_effectiveness_company_box6,
             management_effectiveness_industry_box6,
-            management_effectiveness_sector_box6
+            management_effectiveness_sector_box6,
+            date_scrapped
     ):
         self.symbol = symbol
         self.management_effectiveness_name_box1 = management_effectiveness_name_box1
@@ -2478,6 +2512,7 @@ class ReutersDBManagementEffectivenessTable(ReutersDBConnection):
         self.management_effectiveness_company_box6 = management_effectiveness_company_box6
         self.management_effectiveness_industry_box6 = management_effectiveness_industry_box6
         self.management_effectiveness_sector_box6 = management_effectiveness_sector_box6
+        self.date_scrapped = date_scrapped
 
     def insert_record_management_effectiveness_table(self):
 
@@ -2515,9 +2550,10 @@ class ReutersDBManagementEffectivenessTable(ReutersDBConnection):
                 management_effectiveness_name_box6,
                 management_effectiveness_company_box6,
                 management_effectiveness_industry_box6,
-                management_effectiveness_sector_box6
+                management_effectiveness_sector_box6,
+                date_scrapped
             )
-            values (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?)
+            values (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?,?)
         """
         cur.execute(
             sql_query, (
@@ -2545,7 +2581,8 @@ class ReutersDBManagementEffectivenessTable(ReutersDBConnection):
                 self.management_effectiveness_name_box6,
                 self.management_effectiveness_company_box6,
                 self.management_effectiveness_industry_box6,
-                self.management_effectiveness_sector_box6
+                self.management_effectiveness_sector_box6,
+                self.date_scrapped
             )
         )
         conn.commit()
