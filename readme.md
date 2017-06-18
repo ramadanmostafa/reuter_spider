@@ -19,7 +19,7 @@ cd reuters
 
 update symbol.txt for the targeted symbols (one each line).
 
-scrapy crawl reuters_spider -o output.csv --logfile errors.log --loglevel ERROR
+python run_crawler.py 
 
 this cmd will start the crawler that 
 1- read all symbols from symbols.txt

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+from datetime import datetime
 
 # Scrapy settings for reuters project
 #
@@ -94,3 +95,19 @@ ITEM_PIPELINES = {
 
 # DATABASE settings
 DATABASE_NAME = "reuters_db.sqlite"
+
+
+# logging settings
+LOG_FILE = "errors.log"
+LOG_ENABLED = True
+LOG_LEVEL = "ERROR"
+
+
+# feeds settings
+
+now = datetime.now()
+day = str(now.day)
+month = str(now.month)
+year = str(now.year)
+FEED_FORMAT = 'csv'
+FEED_URI = 'csvdata/data-{}-{}-{}.csv'.format(year, month, day)
