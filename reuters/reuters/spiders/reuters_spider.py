@@ -4,7 +4,6 @@ scrapy spider to get financial information from reuters.com based on a specific 
 """
 import os
 import scrapy
-from scrapy.conf import settings
 from .item_parser import financial_parser
 from scrapy.utils.log import configure_logging
 
@@ -31,7 +30,7 @@ class ReutersSpiderSpider(scrapy.Spider):
         generate a scrapy request for each symbol from the input file
         :return:
         """
-        symbols_file_path = os.path.join(settings.get("BASE_DIR"), 'symbols.txt')
+        symbols_file_path = os.path.join(self.settings.get("BASE_DIR"), 'symbols.txt')
         with open(symbols_file_path, 'r') as file_handle:
             for line in file_handle:
                 print(self.BASE_URL.format(line.strip()))
@@ -46,9 +45,4 @@ class ReutersSpiderSpider(scrapy.Spider):
         :param response:
         :return:
         """
-        # body = response.body
-        # folder_path = os.path.join(settings.get("BASE_DIR"), "webpages")
-        # filename = response.url.split("=")[-1]
-        # with open(os.path.join(folder_path, filename + ".html"), "wb") as f:
-        #     f.write(body)
         yield financial_parser(response)
